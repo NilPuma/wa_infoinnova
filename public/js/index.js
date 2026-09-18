@@ -1,49 +1,12 @@
 // ============================================================
-// INDEX.JS - AGL INTEGRITY S.A.C.
+// INDEX.JS - LANDING PAGE (base de trabajo)
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
-  inicializarCarruseles();
   inicializarScrollReveal();
-  /* consultarCertificado(); */
-  inicializarModalServicios();
   inicializarMenuMovil();
   inicializarToastCerrar();
 });
-
-// ============================================================
-// CARRUSELES (FLICKITY)
-// ============================================================
-function inicializarCarruseles() {
-  if (typeof Flickity === 'undefined') return;
-
-  new Flickity('.carousel-header', {
-    cellAlign: 'center',
-    contain: true,
-    wrapAround: true,
-    autoPlay: 4000,
-    prevNextButtons: false,
-    pageDots: true,
-    pauseAutoPlayOnHover: false,
-    percentPosition: false,
-    draggable: true
-  });
-
-  new Flickity('.carousel-clientes', {
-    cellAlign: 'center',
-    contain: true,
-    wrapAround: true,
-    autoPlay: 3000,
-    prevNextButtons: true,
-    pageDots: false,
-    groupCells: 1,
-    freeScroll: false,
-    friction: 0.8,
-    selectedAttraction: 0.1,
-    adaptiveHeight: true,
-    pauseAutoPlayOnHover: true
-  });
-}
 
 // ============================================================
 // EFECTO DE REVELADO AL HACER SCROLL
@@ -75,126 +38,11 @@ function inicializarScrollReveal() {
 }
 
 // ============================================================
-// MODAL DE CÓDIGO DE ACCESO (CERTIFICADOS)
-// ============================================================
-
-let btnVerificarCodigo = document.querySelector("#btnVerificarCodigo");
-let btnResetear = document.querySelector("#btnResetear");
-
-
-btnVerificarCodigo.addEventListener('click',()=>{  
-  consultarCertificado();
-});
-btnResetear.addEventListener('click',()=>{  
-  resetearCertificado();
-});
-
-
-function resetearCertificado() {
-
-    document.querySelector('#codigoAcceso').value ='';
-    document.querySelector('#contenedorVistaPdf').classList.add('d-none');
-    document.querySelector('#contenedorMuestraPdf').classList.remove('d-none');
-}
-
-
-function consultarCertificado() {
-  let codigoAcceso = document.querySelector('#codigoAcceso');
-  
-  let codigo = codigoAcceso.value.trim();
-  if (!codigo) {
-      mostrarToast('advertencia', 'Importante!', 'Es olbigatorio ingresar el código');
-      return;
-  }
-
-  axios.get('/api/consultarCertificado/' + codigo).then((res) => {
-
-    if (res.data.ok == true) {
-      let urlPdf = res.data.certificado.url_pdf;
-  
-      mostrarToast('exito', 'Verificación exitosa', res.data.mensaje);
-      /* window.open(pdf, '_blank'); */
-      // Mostrar Contenedor de PDF
-      document.querySelector('#contenedorVistaPdf').classList.remove('d-none');
-      document.querySelector('#contenedorMuestraPdf').classList.add('d-none');
-
-      // Mostrar PDF
-      const visorPdf = document.querySelector('#visorPdf');
-      visorPdf.src = urlPdf;
-
-      const btnDescargar = document.querySelector('#btnDescargarPdf');
-      btnDescargar.href = urlPdf;
-
-    }else {
-      console.log(res.data.mensaje);
-      mostrarToast('error', 'Hubo un Error', res.data.mensaje);
-    }
-
-  })
-  .catch(error => {
-    console.error(error);
-  });
-}
-
-function dasdsadas(params) {
-  // Resetear todo al cerrar el modal
-  document.getElementById('modalCodigo').addEventListener('hidden.bs.modal', function() {
-    // Mostrar formulario e imagen
-    formularioCodigo.classList.remove('d-none');
-    if (imagenCertificado) imagenCertificado.classList.remove('d-none');
-    
-    // Ocultar mensajes
-    mensajeExito.classList.add('d-none');
-    mensajeError.classList.add('d-none');
-    
-    // Limpiar input
-    var input = document.getElementById('codigoAcceso');
-    if (input) {
-      input.value = '';
-      input.classList.remove('is-invalid');
-    }
-  });
-}
-
-// ============================================================
-// MODAL DE SERVICIOS (CARGA DINÁMICA)
-// ============================================================
-function inicializarModalServicios() {
-  var modalServicio = document.getElementById('modalServicio');
-
-  if (!modalServicio || typeof serviciosData === 'undefined') return;
-
-  modalServicio.addEventListener('show.bs.modal', function(event) {
-    var button = event.relatedTarget;
-    var servicioId = button.getAttribute('data-servicio');
-    var servicio = serviciosData[servicioId];
-
-    if (servicio) {
-      modalServicio.querySelector('.modal-title').textContent = servicio.titulo;
-
-      var modalImage = modalServicio.querySelector('#modalServicioImagen');
-      modalImage.src = servicio.imagen;
-      modalImage.alt = servicio.titulo;
-
-      modalServicio.querySelector('#modalServicioContenido').innerHTML = servicio.contenido;
-    }
-  });
-
-  modalServicio.addEventListener('hidden.bs.modal', function() {
-    var modalImage = modalServicio.querySelector('#modalServicioImagen');
-    if (modalImage) modalImage.src = '';
-
-    var modalContent = modalServicio.querySelector('#modalServicioContenido');
-    if (modalContent) modalContent.innerHTML = '';
-  });
-}
-
-// ============================================================
 // MENÚ MÓVIL (HAMBURGUESA + OVERLAY)
 // ============================================================
 function inicializarMenuMovil() {
-  var btnToggle = document.getElementById('btnMenuToggle');
-  var iconoToggle = document.getElementById('iconoMenuToggle');
+  var btnToggle = document.getElementById('ico_menu');
+  var iconoToggle = btnToggle ? btnToggle.querySelector('i') : null;
   var overlay = document.getElementById('menuOverlay');
   var menu = document.getElementById('menu');
 
@@ -224,7 +72,7 @@ function inicializarMenuMovil() {
 
   overlay.addEventListener('click', cerrarMenu);
 
-  menu.querySelectorAll('a, .btn--header').forEach(function(opcion) {
+  menu.querySelectorAll('a, .btn-header').forEach(function(opcion) {
     opcion.addEventListener('click', cerrarMenu);
   });
 
@@ -234,13 +82,6 @@ function inicializarMenuMovil() {
     }
   });
 }
-
-// ============================================================
-// EXPORTAR FUNCIONES GLOBALES
-// ============================================================
-window.aglUtils = {
-  inicializarCarruseles: inicializarCarruseles
-};
 
 // ============================================================
 // TOASTS / ALERTAS PERSONALIZADAS
