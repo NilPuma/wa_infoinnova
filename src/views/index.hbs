@@ -3,43 +3,51 @@
   <!-- ==================== HEADER ==================== -->
   <section id="seccionHeader">
     <div class="header">
-      <div class="row contenedor-header">
-        <!-- Icono hamburguer menú -->
-        <div id="ico_menu" class="col-auto">
-          <span><i class="bi bi-list"></i></span>
-        </div>
-        <div class="col">
-          <div>
-            <a href="#"><img src="/img/logo.png" width="100px" class="img-fluid"></a>
+      <div class="container-fluid">
+        <div class="row contenedor-header">
+          <!-- Icono hamburguer menú -->
+          <div id="ico_menu" class="col-auto">
+            <span><i class="bi bi-list"></i></span>
           </div>
-        </div>
-        <!-- Menú de navegación -->
-        <div id="menu" class="col d-flex justify-content-end">
-          <nav>
-            <ul class="nav">
-              <li class="nav-item">
-                <a id="op_inicio" class="nav-link" href="#inicio">INICIO</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#nosotros">NOSOTROS</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#servicios">SERVICIOS</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#clientes">CLIENTES</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#contactanos">CONTÁCTANOS</a>
-              </li>
-              <li class="nav-item">
-                <span class="btn-header" role="button" data-bs-toggle="modal" data-bs-target="#modalCodigo">COTIZA TU PROYECTO</span>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div class="col-auto text-end">
-          <a href="/login" class="btn-admin bi bi-person-circle fs-3"></a>
+          <div class="col">
+            <div>
+              <a href="#inicio"><img src="/img/logo.png" width="100px" class="img-fluid" alt="Innova Sistemas"></a>
+            </div>
+          </div>
+          <!-- Menú de navegación -->
+          <div id="menu" class="col d-flex justify-content-end">
+            <nav>
+              <ul class="nav">
+                <li class="nav-item">
+                  <a id="op_inicio" class="nav-link" href="#inicio">INICIO</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#nosotros">NOSOTROS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#resultados">RESULTADOS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#servicios">SERVICIOS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#clientes">CLIENTES</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#diferencia">DIFERENCIA</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#videos">VIDEOS</a>
+                </li>
+                <li class="nav-item">
+                  <span class="btn-header" role="button" data-bs-toggle="modal" data-bs-target="#modalCodigo">COTIZA TU PROYECTO</span>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-auto text-end">
+            <a href="/login" class="btn-admin bi bi-person-circle fs-3" aria-label="Iniciar sesión"></a>
+          </div>
         </div>
       </div>
     </div>
@@ -50,7 +58,7 @@
 
   <!-- Toast de notificaciones -->
   <div id="toastContainer" class="toast-container-custom" aria-live="polite" aria-atomic="true">
-    <div id="toastCertificado" class="toast-personalizado" role="alert">
+    <div id="toastCertificado" class="toast-personalizado toast-exito" role="alert">
       <i id="toastIcono" class="bi toast-icono"></i>
       <div class="toast-contenido">
         <p id="toastTitulo" class="toast-titulo mb-0"></p>
@@ -68,18 +76,18 @@
     <!-- ==================== SECCIÓN INICIO / HERO ==================== -->
     <section id="inicio" class="seccion-hero">
 
-      <!-- Bloque principal: texto + imagen -->
+      <!-- Bloque principal: texto -->
       <div class="container hero-contenedor">
         <div class="row align-items-center g-4 g-lg-5">
 
-          <!-- Columna izquierda: contenido textual -->
-          <div class="col-lg-6 reveal">
+          <!-- Columna única: contenido textual -->
+          <div class="col-lg-10 col-xl-8 reveal">
             <span class="antetitulo">Tecnología que transforma</span>
-            <h1 class="hero-titulo display-4 fw-bold mb-3">
+            <h1 class="hero-titulo fw-bold mb-3">
               Soluciones digitales para un mundo en
               <span class="text-blanco">constante evolución</span>
             </h1>
-            <p class="hero-descripcion lead mb-4">
+            <p class="hero-descripcion mb-4">
               Desarrollamos software, implementamos infraestructura y brindamos
               soluciones tecnológicas a la medida de tu empresa.
             </p>
@@ -88,20 +96,10 @@
                 <span>Solicita una cotización</span>
                 <i class="bi bi-arrow-right ms-2"></i>
               </a>
-              <a href="#proyectos" class="btn-secundario">
+              <a href="#videos" class="btn-secundario">
                 <i class="bi bi-play-circle-fill me-2"></i>
                 <span>Ver nuestros proyectos</span>
               </a>
-            </div>
-          </div>
-
-          <!-- Columna derecha: imagen destacada -->
-          <div class="col-lg-6 reveal">
-            <div class="hero-imagen-wrapper position-relative">
-              <img src="/img/home.jpg" alt="Innova Sistemas" class="hero-imagen w-100 rounded-4 shadow">
-              <span class="hero-frase-decorativa">
-                Ideas<br>Tecnología<br>Resultados
-              </span>
             </div>
           </div>
 
@@ -152,7 +150,7 @@
           <!-- Columna izquierda: texto -->
           <div class="col-lg-6 order-2 order-lg-1 reveal">
             <span class="antetitulo antetitulo--oscuro">Tu aliado tecnológico</span>
-            <h2 class="titulo-seccion titulo-seccion--principal fw-bold mb-3">
+            <h2 class="titulo-seccion fw-bold mb-3">
               Más que tecnología, somos parte de tu
               <span class="text-verde">crecimiento</span>
             </h2>
@@ -218,7 +216,7 @@
               Cada proyecto es una oportunidad para crear un impacto real en
               nuestros clientes.
             </p>
-            <a href="#proyectos" class="btn-primario">
+            <a href="#servicios" class="btn-primario">
               <span>Conoce casos de éxito</span>
               <i class="bi bi-arrow-right ms-2"></i>
             </a>
@@ -229,7 +227,7 @@
 
             <!-- Antetítulo alineado a la derecha -->
             <div class="resultados-encabezado-derecha text-lg-end mb-4">
-              <span class="antetitulo">Desde Arequipa para el Perú</span>
+              <span class="antetitulo antetitulo--verde">Desde Arequipa para el Perú</span>
               <p class="resultados-subtexto mb-0">
                 Impulsando la transformación digital en todo el país.
               </p>
@@ -277,7 +275,7 @@
         <div class="row align-items-end mb-4 mb-lg-5">
           <div class="col-lg-8 reveal">
             <span class="antetitulo antetitulo--oscuro">Soluciones tecnológicas integrales</span>
-            <h2 class="titulo-seccion titulo-seccion--principal fw-bold mb-0">
+            <h2 class="titulo-seccion fw-bold mb-0">
               Nuestras soluciones
             </h2>
           </div>
@@ -292,18 +290,19 @@
         <!-- Grid de tarjetas de soluciones -->
         <div class="row g-4 soluciones-grid">
 
-          <!-- Card: Desarrollo de software a medida -->
-          <div class="col-md-6 col-lg-4 col-xl reveal">
-            <div class="solucion-card">
+          <!-- Card: Sistema de Innova Negocios -->
+          <div class="col-12 col-sm-6 col-md-4 col-xl reveal">
+            <div id="solucion-innova-negocios" class="solucion-card">
               <div class="solucion-card-imagen">
-                <img src="/img/soluciones/desarrollosoftware.jpg" alt="Desarrollo de software a medida">
+                <img src="/img/soluciones/desarrollosoftware.jpg" alt="Sistema de Innova Negocios">
               </div>
               <div class="solucion-card-contenido">
-                <h3 class="solucion-card-titulo">Desarrollo de software a medida</h3>
+                <h3 class="solucion-card-titulo">Sistema de Innova Negocios</h3>
                 <p class="solucion-card-texto">
-                  Sistemas web, aplicaciones empresariales y soluciones personalizadas.
+                  Plataforma integral para la gestión comercial, inventarios y
+                  facturación de tu negocio.
                 </p>
-                <a href="#servicio-desarrollo" class="btn-enlace">
+                <a href="#solucion-innova-negocios" class="btn-enlace">
                   <span>Conocer más</span>
                   <i class="bi bi-arrow-right ms-1"></i>
                 </a>
@@ -311,18 +310,19 @@
             </div>
           </div>
 
-          <!-- Card: Infraestructura TI y redes -->
-          <div class="col-md-6 col-lg-4 col-xl reveal">
-            <div class="solucion-card">
+          <!-- Card: Sistema de estacionamiento inteligente -->
+          <div class="col-12 col-sm-6 col-md-4 col-xl reveal">
+            <div id="solucion-estacionamiento" class="solucion-card">
               <div class="solucion-card-imagen">
-                <img src="/img/soluciones/infraestructura.jpg" alt="Infraestructura TI y redes">
+                <img src="/img/soluciones/parking.jpg" alt="Sistema de estacionamiento inteligente">
               </div>
               <div class="solucion-card-contenido">
-                <h3 class="solucion-card-titulo">Infraestructura TI y redes</h3>
+                <h3 class="solucion-card-titulo">Sistema de estacionamiento inteligente</h3>
                 <p class="solucion-card-texto">
-                  Diseño, implementación y mantenimiento de redes, servidores y cloud.
+                  Control de acceso, conteo de vehículos y cobro automatizado
+                  para playas de estacionamiento.
                 </p>
-                <a href="#servicio-infraestructura" class="btn-enlace">
+                <a href="#solucion-estacionamiento" class="btn-enlace">
                   <span>Conocer más</span>
                   <i class="bi bi-arrow-right ms-1"></i>
                 </a>
@@ -331,8 +331,8 @@
           </div>
 
           <!-- Card: Seguridad electrónica -->
-          <div class="col-md-6 col-lg-4 col-xl reveal">
-            <div class="solucion-card">
+          <div class="col-12 col-sm-6 col-md-4 col-xl reveal">
+            <div id="solucion-seguridad" class="solucion-card">
               <div class="solucion-card-imagen">
                 <img src="/img/soluciones/seguridad.jpg" alt="Seguridad electrónica">
               </div>
@@ -341,7 +341,7 @@
                 <p class="solucion-card-texto">
                   Cámaras, control de acceso, video vigilancia y sistemas de seguridad.
                 </p>
-                <a href="#servicio-seguridad" class="btn-enlace">
+                <a href="#solucion-seguridad" class="btn-enlace">
                   <span>Conocer más</span>
                   <i class="bi bi-arrow-right ms-1"></i>
                 </a>
@@ -349,18 +349,19 @@
             </div>
           </div>
 
-          <!-- Card: Automatización de procesos -->
-          <div class="col-md-6 col-lg-4 col-xl reveal">
-            <div class="solucion-card">
+          <!-- Card: Sistema para taller mecánico -->
+          <div class="col-12 col-sm-6 col-md-4 col-xl reveal">
+            <div id="solucion-taller" class="solucion-card">
               <div class="solucion-card-imagen">
-                <img src="/img/soluciones/automatizacion.jpg" alt="Automatización de procesos">
+                <img src="/img/soluciones/taller.jpg" alt="Sistema para taller mecánico">
               </div>
               <div class="solucion-card-contenido">
-                <h3 class="solucion-card-titulo">Automatización de procesos</h3>
+                <h3 class="solucion-card-titulo">Sistema para taller mecánico</h3>
                 <p class="solucion-card-texto">
-                  Optimiza tus procesos con tecnología e inteligencia.
+                  Gestión de órdenes de servicio, repuestos, clientes y
+                  seguimiento de vehículos en tiempo real.
                 </p>
-                <a href="#servicio-automatizacion" class="btn-enlace">
+                <a href="#solucion-taller" class="btn-enlace">
                   <span>Conocer más</span>
                   <i class="bi bi-arrow-right ms-1"></i>
                 </a>
@@ -369,8 +370,8 @@
           </div>
 
           <!-- Card: Soporte técnico especializado -->
-          <div class="col-md-6 col-lg-4 col-xl reveal">
-            <div class="solucion-card">
+          <div class="col-12 col-sm-6 col-md-4 col-xl reveal">
+            <div id="solucion-soporte" class="solucion-card">
               <div class="solucion-card-imagen">
                 <img src="/img/soluciones/soporte.jpg" alt="Soporte técnico especializado">
               </div>
@@ -379,7 +380,7 @@
                 <p class="solucion-card-texto">
                   Atención rápida y confiable para que tu negocio nunca se detenga.
                 </p>
-                <a href="#servicio-soporte" class="btn-enlace">
+                <a href="#solucion-soporte" class="btn-enlace">
                   <span>Conocer más</span>
                   <i class="bi bi-arrow-right ms-1"></i>
                 </a>
@@ -398,8 +399,8 @@
 
           <!-- Columna izquierda: encabezado + logos -->
           <div class="col-lg-8 reveal">
-            <span class="antetitulo">Nuestros clientes</span>
-            <h2 class="titulo-seccion titulo-seccion--principal fw-bold mb-3">
+            <span class="antetitulo antetitulo--verde">Nuestros clientes</span>
+            <h2 class="titulo-seccion titulo-seccion--claro fw-bold mb-3">
               Empresas que confían en nosotros
             </h2>
             <p class="clientes-texto mb-4">
@@ -424,7 +425,7 @@
                 <img src="/img/clientes/constructora-del-sur.png" alt="Constructora del Sur">
               </div>
               <div class="col-6 col-md-4 col-lg cliente-logo-item">
-                <img src="/img/clientes/ryc.png" alt="R & C">
+                <img src="/img/clientes/ryc.png" alt="R &amp; C">
               </div>
             </div>
           </div>
@@ -452,8 +453,8 @@
       <div class="container">
         <div class="row reveal">
           <div class="col-lg-8">
-            <span class="antetitulo">Nuestra diferencia</span>
-            <h2 class="titulo-seccion titulo-seccion--principal fw-bold mb-4">
+            <span class="antetitulo antetitulo--verde">Nuestra diferencia</span>
+            <h2 class="titulo-seccion titulo-seccion--claro fw-bold mb-4">
               ¿Por qué elegir Innova Sistemas?
             </h2>
           </div>
@@ -513,90 +514,117 @@
       </div>
     </section>
 
-    <!-- ==================== SECCIÓN BLOG ==================== -->
-    <section id="blog" class="seccion-blog">
+    <!-- ==================== SECCIÓN VIDEOS ==================== -->
+    <section id="videos" class="seccion-videos">
       <div class="container">
 
         <!-- Encabezado de sección -->
         <div class="row align-items-end mb-4 mb-lg-5">
           <div class="col-lg-8 reveal">
-            <span class="antetitulo antetitulo--oscuro">Nuestro blog</span>
-            <h2 class="titulo-seccion titulo-seccion--principal fw-bold mb-0">
-              Últimas noticias y artículos
+            <span class="antetitulo antetitulo--oscuro">Nuestro canal</span>
+            <h2 class="titulo-seccion fw-bold mb-0">
+              Videos y proyectos en acción
             </h2>
           </div>
           <div class="col-lg-4 text-lg-end reveal">
-            <a href="#blog-todas" class="btn-enlace">
-              <span>Ver todas las publicaciones</span>
+            <a href="#videos-todos" class="btn-enlace">
+              <span>Ver todos los videos</span>
               <i class="bi bi-arrow-right ms-1"></i>
             </a>
           </div>
         </div>
 
-        <!-- Grid de artículos -->
-        <div class="row g-4 blog-grid">
+        <!-- Grid de videos -->
+        <div class="row g-4 videos-grid">
 
-          <!-- Artículo 1 -->
-          <div class="col-md-6 col-lg-4 reveal">
-            <a href="#blog-articulo-1" class="blog-card">
-              <div class="blog-card-imagen">
-                <img src="/img/blog/tendencias-2025.jpg" alt="Tendencias tecnológicas para empresas en 2025">
-              </div>
-              <div class="blog-card-contenido">
-                <span class="blog-card-fecha">15 Jul 2025</span>
-                <h3 class="blog-card-titulo">Tendencias tecnológicas para empresas en 2025</h3>
-                <p class="blog-card-texto">
-                  La tecnología avanza rápidamente. Conoce las principales tendencias que están transformando...
-                </p>
-                <span class="btn-enlace">
-                  <span>Leer más</span>
-                  <i class="bi bi-arrow-right ms-1"></i>
+          <!-- Video 1 -->
+          <div class="col-12 col-sm-6 col-lg-3 reveal">
+            <div class="video-card">
+              <div class="video-preview">
+                <img src="/img/videos/placeholder-1.gif" alt="Así implementamos un sistema de seguridad electrónica">
+                <span class="video-play-icono">
+                  <i class="bi bi-play-fill"></i>
                 </span>
+                <span class="video-duracion">02:34</span>
               </div>
-            </a>
+              <div class="video-contenido">
+                <h3 class="video-titulo">Seguridad electrónica en acción</h3>
+                <p class="video-texto">
+                  Así implementamos un sistema completo de videovigilancia.
+                </p>
+              </div>
+            </div>
           </div>
 
-          <!-- Artículo 2 -->
-          <div class="col-md-6 col-lg-4 reveal">
-            <a href="#blog-articulo-2" class="blog-card">
-              <div class="blog-card-imagen">
-                <img src="/img/blog/seguridad-electronica.jpg" alt="Seguridad electrónica en empresas: una necesidad, no un lujo">
-              </div>
-              <div class="blog-card-contenido">
-                <span class="blog-card-fecha">02 Jul 2025</span>
-                <h3 class="blog-card-titulo">Seguridad electrónica en empresas: una necesidad, no un lujo</h3>
-                <p class="blog-card-texto">
-                  Descubre cómo proteger tu empresa con soluciones de seguridad modernas y escalables.
-                </p>
-                <span class="btn-enlace">
-                  <span>Leer más</span>
-                  <i class="bi bi-arrow-right ms-1"></i>
+          <!-- Video 2 -->
+          <div class="col-12 col-sm-6 col-lg-3 reveal">
+            <div class="video-card">
+              <div class="video-preview">
+                <img src="/img/videos/placeholder-2.gif" alt="Estacionamiento inteligente en acción">
+                <span class="video-play-icono">
+                  <i class="bi bi-play-fill"></i>
                 </span>
+                <span class="video-duracion">01:48</span>
               </div>
-            </a>
+              <div class="video-contenido">
+                <h3 class="video-titulo">Estacionamiento inteligente</h3>
+                <p class="video-texto">
+                  Control de acceso y cobro automatizado para playas.
+                </p>
+              </div>
+            </div>
           </div>
 
-          <!-- Artículo 3 -->
-          <div class="col-md-6 col-lg-4 reveal">
-            <a href="#blog-articulo-3" class="blog-card">
-              <div class="blog-card-imagen">
-                <img src="/img/blog/automatizacion-procesos.jpg" alt="Beneficios de la automatización de procesos">
-              </div>
-              <div class="blog-card-contenido">
-                <span class="blog-card-fecha">26 Jun 2025</span>
-                <h3 class="blog-card-titulo">Beneficios de la automatización de procesos</h3>
-                <p class="blog-card-texto">
-                  Cómo la automatización puede ayudar a ser más eficiente y reducir costos operativos.
-                </p>
-                <span class="btn-enlace">
-                  <span>Leer más</span>
-                  <i class="bi bi-arrow-right ms-1"></i>
+          <!-- Video 3 -->
+          <div class="col-12 col-sm-6 col-lg-3 reveal">
+            <div class="video-card">
+              <div class="video-preview">
+                <img src="/img/videos/placeholder-3.gif" alt="Taller mecánico digitalizado">
+                <span class="video-play-icono">
+                  <i class="bi bi-play-fill"></i>
                 </span>
+                <span class="video-duracion">03:12</span>
               </div>
-            </a>
+              <div class="video-contenido">
+                <h3 class="video-titulo">Taller mecánico digitalizado</h3>
+                <p class="video-texto">
+                  Conoce el sistema de gestión para talleres en 3 pasos.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Video 4 -->
+          <div class="col-12 col-sm-6 col-lg-3 reveal">
+            <div class="video-card">
+              <div class="video-preview">
+                <img src="/img/videos/placeholder-4.gif" alt="Tips de ciberseguridad">
+                <span class="video-play-icono">
+                  <i class="bi bi-play-fill"></i>
+                </span>
+                <span class="video-duracion">04:05</span>
+              </div>
+              <div class="video-contenido">
+                <h3 class="video-titulo">Tips de ciberseguridad</h3>
+                <p class="video-texto">
+                  Protege tu negocio con estas prácticas recomendadas.
+                </p>
+              </div>
+            </div>
           </div>
 
         </div>
+
+        <!-- CTA para ver más videos -->
+        <div class="row mt-5 reveal">
+          <div class="col-12 text-center">
+            <a href="#videos-todos" class="btn-primario">
+              <i class="bi bi-play-circle me-2"></i>
+              <span>Ver más videos</span>
+            </a>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -689,22 +717,11 @@
         <div class="col-lg-3 col-md-6">
           <h3 class="footer-columna-titulo">Soluciones</h3>
           <ul class="footer-lista">
-            <li><a href="#servicio-desarrollo">Desarrollo de software</a></li>
-            <li><a href="#servicio-infraestructura">Infraestructura TI</a></li>
-            <li><a href="#servicio-seguridad">Seguridad electrónica</a></li>
-            <li><a href="#servicio-automatizacion">Automatización</a></li>
-            <li><a href="#servicio-soporte">Soporte técnico</a></li>
-          </ul>
-        </div>
-
-        <!-- Columna: Empresa -->
-        <div class="col-lg-2 col-md-6">
-          <h3 class="footer-columna-titulo">Empresa</h3>
-          <ul class="footer-lista">
-            <li><a href="#nosotros">Nosotros</a></li>
-            <li><a href="#proyectos">Proyectos</a></li>
-            <li><a href="#clientes">Clientes</a></li>
-            <li><a href="#contactanos">Contacto</a></li>
+            <li><a href="#solucion-innova-negocios">Sistema de Innova Negocios</a></li>
+            <li><a href="#solucion-estacionamiento">Estacionamiento inteligente</a></li>
+            <li><a href="#solucion-seguridad">Seguridad electrónica</a></li>
+            <li><a href="#solucion-taller">Sistema para taller mecánico</a></li>
+            <li><a href="#solucion-soporte">Soporte técnico</a></li>
           </ul>
         </div>
 
@@ -727,11 +744,18 @@
           </ul>
         </div>
 
-        <!-- Columna: Mapa / ubicación -->
-        <div class="col-lg-2 col-md-6">
-          <div class="footer-mapa">
-            <img src="/img/mapa-peru.png" alt="Cobertura Perú" class="footer-mapa-img">
-            <span class="footer-mapa-texto">Tecnología para un Perú mejor.</span>
+        <!-- Columna: Mapa / ubicación con Google Maps -->
+        <div class="col-lg-4 col-md-6">
+          <h3 class="footer-columna-titulo">Ubícanos</h3>
+          <div class="footer-mapa-google">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d478.55726865562536!2d-71.5718026!3d-16.3506077!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424b302b619869%3A0xaa931af08c8581b6!2sInnova%20Sistemas%20Integrales%20S.A.C.!5e0!3m2!1ses-419!2spe!4v1789745547986!5m2!1ses-419!2spe"
+              height="250"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
           </div>
         </div>
 
@@ -744,7 +768,7 @@
       <div class="row align-items-center footer-inferior">
         <div class="col-md-6">
           <span class="footer-copyright">
-            &copy; {{anioActual}} Innova Sistemas. Todos los derechos reservados.
+            &copy; 2026 Innova Sistemas. Todos los derechos reservados.
           </span>
         </div>
         <div class="col-md-6 text-md-end">
