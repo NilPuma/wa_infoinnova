@@ -1,11 +1,15 @@
 // ============================================================
-// INDEX.JS - LANDING PAGE (base de trabajo)
+// INDEX.JS - LANDING PAGE
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
-  inicializarScrollReveal();
+  inicializarStaggerReveal();    // PRIMERO: aplica --retraso antes de observar
+  inicializarScrollReveal();     // DESPUÉS: observa los .reveal
   inicializarMenuMovil();
   inicializarToastCerrar();
+  inicializarHeaderScroll();
+  inicializarContadores();
+  inicializarHeroSlider();       // Slider de fondo del hero
 });
 
 // ============================================================
@@ -35,6 +39,18 @@ function inicializarScrollReveal() {
   });
 
   revealEls.forEach(function(el) { observer.observe(el); });
+}
+
+// ============================================================
+// REVEAL ESCALONADO — DELAY POR CARD
+// ============================================================
+function inicializarStaggerReveal() {
+  var cards = document.querySelectorAll('.soluciones-grid .reveal, .videos-grid .reveal');
+  if (!cards.length) return;
+
+  cards.forEach(function(el, i) {
+    el.style.setProperty('--retraso', ((i % 5) * 90) + 'ms');
+  });
 }
 
 // ============================================================
@@ -128,5 +144,138 @@ function inicializarToastCerrar() {
   btnCerrar.addEventListener('click', function() {
     toast.classList.remove('is-visible');
     if (toastTimeoutId) clearTimeout(toastTimeoutId);
+  });
+}
+
+// ============================================================
+// HEADER — EFECTO GLASS AL HACER SCROLL
+// ============================================================
+function inicializarHeaderScroll() {
+  var header = document.querySelector('.header');
+  if (!header) return;
+
+  function actualizarHeader() {
+    if (window.scrollY > 30) {
+      header.classList.add('header--scrolled');
+    } else {
+      header.classList.remove('header--scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', actualizarHeader, { passive: true });
+  actualizarHeader(); // Aplicar estado correcto al cargar
+}
+
+// ============================================================
+// SLIDER DE FONDO DEL HERO
+// ============================================================
+function inicializarHeroSlider() {
+  var slides = document.querySelectorAll('.hero-slider__slide');
+  if (slides.length < 2) return;
+
+  // Respetar prefers-reduced-motion: dejar solo la primera imagen
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    slides.forEach(function(s, i) {
+      s.classList.toggle('is-active', i === 0);
+    });
+    return;
+  }
+
+  var indiceActual = 0;
+  var intervalo = 6000; // 6 segundos por imagen
+  var timerId = null;
+
+  function mostrarSlide(nuevoIndice) {
+    slides[indiceActual].classList.remove('is-active');
+    slides[nuevoIndice].classList.add('is-active');
+    indiceActual = nuevoIndice;
+  }
+
+  function siguiente() {
+    var siguienteIndice = (indiceActual + 1) % slides.length;
+    mostrarSlide(siguienteIndice);
+  }
+
+  function iniciar() {
+    if (timerId) clearInterval(timerId);
+    timerId = setInterval(siguiente, intervalo);
+  }
+
+  function detener() {
+    if (timerId) {
+      clearInterval(timerId);
+      timerId = null;
+    }
+  }
+
+  // Pausar cuando la pestaña no está visible (ahorro de recursos)
+  document.addEventListener('visibilitychange', function() {
+    document.hidden ? detener() : iniciar();
+  });
+
+  // Iniciar
+  iniciar();
+}
+
+// ============================================================
+// CONTADOR ANIMADO — SE DISPARA AL ENTRAR EN VIEWPORT
+// ============================================================
+function inicializarContadores() {
+  var contadores = document.querySelectorAll('[data-contador]');
+  if (!contadores.length) return;
+
+  // Respetar prefers-reduced-motion: mostrar valor final sin animar
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) {
+    contadores.forEach(function(el) {
+      var meta = parseInt(el.dataset.contador, 10) || 0;
+      var sufijo = el.dataset.sufijo || '';
+      el.textContent = meta + sufijo;
+    });
+    return;
+  }
+
+  // Fallback si no hay IntersectionObserver
+  if (!('IntersectionObserver' in window)) {
+    contadores.forEach(function(el) {
+      var meta = parseInt(el.dataset.contador, 10) || 0;
+      var sufijo = el.dataset.sufijo || '';
+      el.textContent = meta + sufijo;
+    });
+    return;
+  }
+
+  function animarContador(el) {
+    var meta = parseInt(el.dataset.contador, 10) || 0;
+    var sufijo = el.dataset.sufijo || '';
+    var duracion = 1200;
+    var inicio = performance.now();
+
+    function paso(ahora) {
+      var progreso = Math.min((ahora - inicio) / duracion, 1);
+      var valor = Math.floor(progreso * meta);
+      el.textContent = valor + sufijo;
+      if (progreso < 1) {
+        requestAnimationFrame(paso);
+      } else {
+        el.textContent = meta + sufijo; // Asegurar valor final exacto
+      }
+    }
+
+    requestAnimationFrame(paso);
+  }
+
+  var observerContadores = new IntersectionObserver(function(entradas) {
+    entradas.forEach(function(entrada) {
+      if (entrada.isIntersecting) {
+        animarContador(entrada.target);
+        observerContadores.unobserve(entrada.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  contadores.forEach(function(el) {
+    observerContadores.observe(el);
   });
 }
