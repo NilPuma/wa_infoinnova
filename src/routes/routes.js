@@ -63,6 +63,9 @@ const upload = multer({storage: storage,
 router.get('/', (req, res) =>{
     res.render('index');
 });
+router.get('/negocios', (req, res) => {
+    res.render('negocios', { layout: false });
+});
 router.get('/login', (req, res) => {
     res.render('login');
 });
@@ -88,3 +91,4 @@ router.post('/api/registrarCertificado', upload.single('archivo'), controladorCe
 router.delete('/api/Eliminarcertificado/:id',controladorCertificados.eliminarCertificado);
 
 module.exports = router;
+
