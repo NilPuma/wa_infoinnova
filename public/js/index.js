@@ -5,7 +5,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   if (window.AOS) {
     document.documentElement.classList.add("aos-habilitado");
-    AOS.init({ offset: 80, duration: 700, easing: 'ease-out-cubic', once: true });
+    AOS.init({ offset: 80, duration: 700, easing: 'ease-out-cubic', once: false });
   }
   inicializarCarruselSoluciones();
   inicializarMenuMovil();
