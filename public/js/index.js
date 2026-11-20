@@ -3,8 +3,11 @@
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
-  inicializarStaggerReveal();    // PRIMERO: aplica --retraso antes de observar
-  inicializarScrollReveal();     // DESPUÉS: observa los .reveal
+  if (window.AOS) {
+    document.documentElement.classList.add("aos-habilitado");
+    AOS.init({ offset: 80, duration: 700, easing: 'ease-out-cubic', once: true });
+  }
+  inicializarCarruselSoluciones();
   inicializarMenuMovil();
   inicializarToastCerrar();
   inicializarHeaderScroll();
@@ -13,44 +16,60 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================
-// EFECTO DE REVELADO AL HACER SCROLL
+// CARRUSEL DE SERVICIOS: FLECHAS Y ARRASTRE CON MOUSE
 // ============================================================
-function inicializarScrollReveal() {
-  var revealEls = document.querySelectorAll('.reveal');
-  if (!revealEls.length) return;
+function inicializarCarruselSoluciones() {
+  var lista = document.getElementById('listaSoluciones');
+  var anterior = document.querySelector('[data-servicios-anterior]');
+  var siguiente = document.querySelector('[data-servicios-siguiente]');
+  if (!lista || !anterior || !siguiente) return;
 
-  if (!('IntersectionObserver' in window)) {
-    revealEls.forEach(function(el) { el.classList.add('is-visible'); });
-    return;
+  function actualizarControles() {
+    var maximo = lista.scrollWidth - lista.clientWidth;
+    anterior.disabled = lista.scrollLeft <= 2;
+    siguiente.disabled = lista.scrollLeft >= maximo - 2;
   }
 
-  revealEls.forEach(function(el) { el.classList.add('reveal-ready'); });
+  function desplazar(direccion) {
+    var elemento = lista.querySelector('.soluciones-elemento');
+    if (!elemento) return;
+    var separacion = parseFloat(window.getComputedStyle(lista).columnGap) || 0;
+    var paso = elemento.getBoundingClientRect().width + separacion;
+    lista.scrollBy({ left: paso * direccion, behavior: 'smooth' });
+  }
 
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
+  anterior.addEventListener('click', function() { desplazar(-1); });
+  siguiente.addEventListener('click', function() { desplazar(1); });
+  lista.addEventListener('scroll', actualizarControles, { passive: true });
+  window.addEventListener('resize', actualizarControles);
+
+  var arrastrando = false;
+  var inicioX = 0;
+  var desplazamientoInicial = 0;
+
+  lista.addEventListener('pointerdown', function(evento) {
+    if (evento.pointerType !== 'mouse' || evento.button !== 0 || evento.target.closest('a, button')) return;
+    arrastrando = true;
+    inicioX = evento.clientX;
+    desplazamientoInicial = lista.scrollLeft;
+    lista.classList.add('arrastrando');
+    lista.setPointerCapture(evento.pointerId);
   });
 
-  revealEls.forEach(function(el) { observer.observe(el); });
-}
-
-// ============================================================
-// REVEAL ESCALONADO — DELAY POR CARD
-// ============================================================
-function inicializarStaggerReveal() {
-  var cards = document.querySelectorAll('.soluciones-grid .reveal, .videos-grid .reveal');
-  if (!cards.length) return;
-
-  cards.forEach(function(el, i) {
-    el.style.setProperty('--retraso', ((i % 5) * 90) + 'ms');
+  lista.addEventListener('pointermove', function(evento) {
+    if (!arrastrando) return;
+    lista.scrollLeft = desplazamientoInicial - (evento.clientX - inicioX);
   });
+
+  function terminarArrastre() {
+    arrastrando = false;
+    lista.classList.remove('arrastrando');
+  }
+
+  lista.addEventListener('pointerup', terminarArrastre);
+  lista.addEventListener('pointercancel', terminarArrastre);
+  lista.addEventListener('lostpointercapture', terminarArrastre);
+  actualizarControles();
 }
 
 // ============================================================
@@ -105,10 +124,10 @@ function inicializarMenuMovil() {
 var toastTimeoutId = null;
 
 function mostrarToast(tipo, titulo, mensaje) {
-  var toast = document.getElementById('toastCertificado');
-  var icono = document.getElementById('toastIcono');
-  var elTitulo = document.getElementById('toastTitulo');
-  var elMensaje = document.getElementById('toastMensaje');
+  var toast = document.getElementById('notificacionCertificado');
+  var icono = document.getElementById('notificacionIcono');
+  var elTitulo = document.getElementById('notificacionTitulo');
+  var elMensaje = document.getElementById('notificacionMensaje');
 
   if (!toast || !icono || !elTitulo || !elMensaje) return;
 
@@ -137,8 +156,8 @@ function mostrarToast(tipo, titulo, mensaje) {
 }
 
 function inicializarToastCerrar() {
-  var btnCerrar = document.getElementById('toastCerrar');
-  var toast = document.getElementById('toastCertificado');
+  var btnCerrar = document.getElementById('notificacionCerrar');
+  var toast = document.getElementById('notificacionCertificado');
   if (!btnCerrar || !toast) return;
 
   btnCerrar.addEventListener('click', function() {
