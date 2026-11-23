@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
   inicializarToastCerrar();
   inicializarHeaderScroll();
   inicializarContadores();
-  inicializarHeroSlider();       // Slider de fondo del hero
+  inicializarHeroSlider();
 });
 
 // ============================================================
